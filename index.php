@@ -59,8 +59,17 @@ if (!$_COOKIE['ga']) {
 	$username = openssl_decrypt(base64_decode($_COOKIE["un"]),"DES-ECB","12345");
     print $qrcode."<br><br><br>";
     $uu = $g->getURL($username, "demo", $secret);
-    echo "<img src='" . $uu . "'/>";
-    echo "<img src='https://qrcode.online/img/?type=text&data=otpauth://totp/" . $username . "(demo.niuzhaohang.top)?secret=" . $secret . "'";
+	if ($value->country_id!="CN"){
+		if ($_SERVER["QUERY_STRING"]=="lang=zh"){	
+				echo "<img src='https://qrcode.online/img/?type=text&data=otpauth://totp/" . $username . "(demo.niuzhaohang.top)?secret=" . $secret . "'onerror=\"javascript:this.style.display='none';\"/>";
+			}else{
+				echo "<img src='" . $uu . "'/>";}
+		}else{
+			if ($_SERVER["QUERY_STRING"]=="lang=en"){
+				echo "<img src='" . $uu . "'/>";
+			}else{
+				echo "<img src='https://qrcode.online/img/?type=text&data=otpauth://totp/" . $username . "(demo.niuzhaohang.top)?secret=" . $secret . "'onerror=\"javascript:this.style.display='none';\"/>";
+}};
 	if (isset($_POST['code'])){
 	if ($_POST['code']==$g->getCode($secret)) {
 		echo "<script>alert ('".$correct."')</script>";
@@ -84,6 +93,6 @@ if (!$_COOKIE['ga']) {
 	</body>
 		<footer>
 			<script>var clipboard = new ClipboardJS('.btn');clipboard.on('success', function(e) {alert("<?php echo $copysuccess;?>")});clipboard.on('error', function(e) {alert("<?php echo $copyfailed;?>")});</script>
-				<br><a href="https://blog.niuzhaohang.top"><?php echo $myblog;?></a>&nbsp;&nbsp;&nbsp;  <a href="https://github.com/Koukotsukan">Github</a>
+				<br><a href="https://blog.niuzhaohang.top"><?php echo $myblog;?></a>&nbsp;&nbsp;&nbsp;  <a href="https://github.com/Koukotsukan">GitHub</a>
 		</footer>
 </html>
