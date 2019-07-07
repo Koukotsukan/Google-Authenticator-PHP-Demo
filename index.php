@@ -26,8 +26,7 @@ require_once "language.php";
 	<?php echo $alertboard;?>
 	</div></center></header>
 	
-	<body>
-	
+	<body>	
 <?php
 include_once "lib/GoogleAuthenticator.php";
 if (!$_COOKIE['ga']) {
