@@ -61,6 +61,7 @@ if (!$_COOKIE['ga']) {
     print $qrcode."<br><br><br>";
     $uu = $g->getURL($username, "demo", $secret);
     echo "<img src='" . $uu . "'/>";
+    echo "<img src='https://qrcode.online/img/?type=text&data=otpauth://totp/" . $username . "(demo.niuzhaohang.top)?secret=" . $secret . "'";
 	if (isset($_POST['code'])){
 	if ($_POST['code']==$g->getCode($secret)) {
 		echo "<script>alert ('".$correct."')</script>";
